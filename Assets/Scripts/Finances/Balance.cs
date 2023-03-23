@@ -32,6 +32,7 @@ namespace TestTask100HPGames.Finances
         public void Refresh()
         {
             Coins = 0;
+            OnChanged?.Invoke();
         }
     }
 }

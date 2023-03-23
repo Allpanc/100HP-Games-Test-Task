@@ -22,9 +22,9 @@ namespace TestTask100HPGames.Statistics.Upgradings
             Upgrade shootingSpeed2 = new Upgrade(_stats, Stat.ShootingSpeed, 0.2f, 2, 10);
             Upgrade shootingSpeed3 = new Upgrade(_stats, Stat.ShootingSpeed, 0.2f, 3, 15);
 
-            Upgrade reach1 = new Upgrade(_stats, Stat.Reach, 5f, 1, 5);
-            Upgrade reach2 = new Upgrade(_stats, Stat.Reach, 5f, 2, 5);
-            Upgrade reach3 = new Upgrade(_stats, Stat.Reach, 5f, 3, 5);
+            Upgrade reach1 = new Upgrade(_stats, Stat.Reach, 3f, 1, 5);
+            Upgrade reach2 = new Upgrade(_stats, Stat.Reach, 3f, 2, 10);
+            Upgrade reach3 = new Upgrade(_stats, Stat.Reach, 3f, 3, 15);
 
             upgrades.Add(damage1);
             upgrades.Add(damage2);

@@ -13,8 +13,8 @@ namespace TestTask100HPGames
         public override void Enter()
         {
             base.Enter();
-            WaitForCountdown();
             Balance.Instance.Refresh();
+            WaitForCountdown();       
         }
 
         private async void WaitForCountdown()
