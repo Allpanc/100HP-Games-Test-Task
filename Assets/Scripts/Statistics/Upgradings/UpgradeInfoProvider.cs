@@ -4,15 +4,17 @@ using TestTask100HPGames.Finances;
 
 namespace TestTask100HPGames.Statistics.Upgradings
 {
-    public class Upgrades
+    public class UpgradeInfoProvider
     {
         private Dictionary<Stat, int> _statUpgradeLevelMap = new Dictionary<Stat, int>();
-        private List<Upgrade> _upgrades;
+        private List<UpgradeInfo> _upgrades;
+        private Stats _stats;
 
         public event Action<Stat> OnApplied;
 
-        public Upgrades(List<Upgrade> upgrades, Stats stats)
+        public UpgradeInfoProvider(List<UpgradeInfo> upgrades, Stats stats)
         {
+            _stats = stats;
             _upgrades = upgrades;
             foreach (StatInfo statInfo in stats.stats)
             {
@@ -24,11 +26,11 @@ namespace TestTask100HPGames.Statistics.Upgradings
         {
             int currentLevel = _statUpgradeLevelMap[stat];
 
-            Upgrade upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
+            UpgradeInfo upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
             Balance.Instance.Remove(upgrade.Cost);
 
             _statUpgradeLevelMap[stat] = upgrade.Level;
-            upgrade.Apply();
+            upgrade.Apply(_stats);
             OnApplied?.Invoke(stat);
         }
 
@@ -36,7 +38,7 @@ namespace TestTask100HPGames.Statistics.Upgradings
         {
             int currentLevel = _statUpgradeLevelMap[stat];
 
-            Upgrade upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
+            UpgradeInfo upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
 
             if (upgrade == null)
                 return false;
@@ -47,25 +49,25 @@ namespace TestTask100HPGames.Statistics.Upgradings
             return true;
         }
 
-        public Upgrade Initial(Stat stat)
+        public UpgradeInfo Initial(Stat stat)
         {
-            Upgrade upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == 1);
+            UpgradeInfo upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == 1);
             return upgrade;
         }
 
-        public Upgrade Current(Stat stat)
+        public UpgradeInfo Current(Stat stat)
         {
             int currentLevel = _statUpgradeLevelMap[stat];
 
-            Upgrade upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel);
+            UpgradeInfo upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel);
             return upgrade;
         }
 
-        public Upgrade Next(Stat stat)
+        public UpgradeInfo Next(Stat stat)
         {
             int currentLevel = _statUpgradeLevelMap[stat];
 
-            Upgrade upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
+            UpgradeInfo upgrade = _upgrades.Find(x => x.Stat == stat && x.Level == currentLevel + 1);
             return upgrade;
         }
     }

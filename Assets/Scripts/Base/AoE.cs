@@ -33,7 +33,7 @@ namespace TestTask100HPGames.Base
         private async void SubscribeToReachUpdates()
         {
             await Task.Yield();
-            _tower.Upgrades.OnApplied += UpdateReach;
+            _tower.UpgradeInfoProvider.OnApplied += UpdateReach;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace TestTask100HPGames.GUI
         public Stat Stat;
 
         private Tower _tower;
-        private Upgrades _upgrades;
+        private UpgradeInfoProvider _upgradeInfoProvider;
 
         public event Action OnUpdated;
 
@@ -42,10 +42,10 @@ namespace TestTask100HPGames.GUI
 
         private void OnUpgradeButtonClick()
         {
-            if (!_upgrades.IsAvaliable(Stat))
+            if (!_upgradeInfoProvider.IsAvaliable(Stat))
                 return;
 
-            _upgrades.Apply(Stat);
+            _upgradeInfoProvider.Apply(Stat);
             SetLevelText();
             SetPriceText();
             OnUpdated?.Invoke();
@@ -53,13 +53,13 @@ namespace TestTask100HPGames.GUI
 
         private void SetLevelText()
         {
-            Upgrade current = _upgrades.Current(Stat);
-            _textLevel.text = "Level " + (current.Level + 1).ToString() ;
+            UpgradeInfo current = _upgradeInfoProvider.Current(Stat);
+            _textLevel.text = "Level " + (current.Level + 1).ToString();
         }
 
         private void SetPriceText()
         {
-            Upgrade next = _upgrades.Next(Stat);
+            UpgradeInfo next = _upgradeInfoProvider.Next(Stat);
 
             if (next != null)
                 _textPrice.text = next.Cost.ToString();
@@ -70,13 +70,13 @@ namespace TestTask100HPGames.GUI
         private async void SetUpContent()
         {
             await GetUpgrades();
-            _textPrice.text = _upgrades.Initial(Stat).Cost.ToString();
+            _textPrice.text = _upgradeInfoProvider.Initial(Stat).Cost.ToString();
         }
 
         private async Task GetUpgrades()
         {
             await Task.Yield();
-            _upgrades = _tower.Upgrades;
+            _upgradeInfoProvider = _tower.UpgradeInfoProvider;
         }
     }
 }

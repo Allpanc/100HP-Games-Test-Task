@@ -14,7 +14,10 @@ namespace TestTask100HPGames.Base
 
         public Stats Stats;
 
-        public Upgrades Upgrades { get; private set; }
+        [SerializeField] 
+        private List<UpgradeInfo> upgradeInfos;
+
+        public UpgradeInfoProvider UpgradeInfoProvider { get; private set; }
 
         public event Action OnReached;
 
@@ -40,9 +43,7 @@ namespace TestTask100HPGames.Base
 
         private void InitializeUpgrades()
         {
-            UpgradesProvider upgradesProvider = new UpgradesProvider(Stats);
-            List<Upgrade> upgrades = upgradesProvider.GetTowerUpgradesList();
-            Upgrades = new Upgrades(upgrades, Stats);
+            UpgradeInfoProvider = new UpgradeInfoProvider(upgradeInfos, Stats);
         }
     }
 }

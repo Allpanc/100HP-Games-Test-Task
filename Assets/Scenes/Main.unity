@@ -3018,6 +3018,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 82ba53b4f46878b4aad371beae4dffff, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 008be007c39b9404ebd202ac45c2e261, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 61ac802b12aedd04bbfd39857107c1f7, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: d011c6f94da6b7e46a4ac3e6a86e9777, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: b104377a6f7461848a8a66b4c51a8584, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: a42f6071228b9aa4ba7a0b845455fc78, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: d6ecc973c9e7a3e498193ba1b6c1eec3, type: 2}
+    - target: {fileID: 7687893914149626015, guid: c895265c8f97b464c8864df76818a56d, type: 3}
+      propertyPath: upgradeInfos.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c936565b1226c74ab2289d324c23d6c, type: 2}
     - target: {fileID: 7687893914149673236, guid: c895265c8f97b464c8864df76818a56d, type: 3}
       propertyPath: m_Name
       value: Tower

@@ -2,6 +2,6 @@
 {
     interface IUpgrade
     {
-        public void Apply();
+        public void Apply(Stat stat);
     }
 }
