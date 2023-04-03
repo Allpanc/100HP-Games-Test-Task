@@ -1,4 +1,5 @@
 ﻿using System;
+using TestTask100HPGames.Utils.Services;
 using UnityEngine;
 using Zenject;
 using Random = System.Random;
@@ -11,17 +12,21 @@ namespace TestTask100HPGames.Enemy.Spawn
         private Orc _orcPrefab;
         private Knight _knightPrefab;
         private DiContainer _diContainer;
+        private AssetsProvider _assets;
 
         public EnemyFactory(DiContainer diContainer)
         {
             _diContainer = diContainer;
+            _assets = new AssetsProvider();
+
+            Load();
         }
 
-        public void Load()
+        private void Load()
         {
-            _skeletonPrefab = Resources.Load<Skeleton>("Skeleton");
-            _orcPrefab = Resources.Load<Orc>("Orc");
-            _knightPrefab = Resources.Load<Knight>("Knight");
+            _skeletonPrefab = _assets.Skeleton();
+            _orcPrefab = _assets.Orc();
+            _knightPrefab = _assets.Knight();
         }
 
         public void Spawn(EnemyType enemyType, Vector3 position, Quaternion rotation)

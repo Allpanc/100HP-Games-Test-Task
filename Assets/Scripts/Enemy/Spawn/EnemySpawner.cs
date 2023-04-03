@@ -19,6 +19,8 @@ namespace TestTask100HPGames.Enemy.Spawn
         private Coroutine _spawnRoutine;
         private Tower _tower;
 
+        private int _spawnCounter;
+
         [Inject]
         private void Construct(Tower tower, DiContainer diContainer)
         {
@@ -26,11 +28,6 @@ namespace TestTask100HPGames.Enemy.Spawn
             
             _tower = tower;
             SpawnTransformsHelper.CenterPos = _tower.transform.position;
-        }
-
-        private void Start()
-        {
-            _factory.Load();
         }
 
         public void Activate()
@@ -59,6 +56,9 @@ namespace TestTask100HPGames.Enemy.Spawn
             Quaternion spawnRotation = SpawnTransformsHelper.GetSpawnRotation(spawnPosition);
 
             _factory.SpawnRandomEnemy(spawnPosition, spawnRotation);
+            _spawnCounter++;
+            if (_spawnCounter % 20 == 0)
+                _timeBetweenSpawns /= 1.5f;
         }
 
         private void OnDestroy()
