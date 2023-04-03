@@ -10,6 +10,7 @@ namespace TestTask100HPGames.Utils
         public EnemySpawner EnemySpawner;
         public EnemyTracker EnemyTracker;
         public ObjectPool ObjectPool;
+        public CountdownDisplay CountdownDisplay;
 
         public override void InstallBindings()
         {
@@ -17,6 +18,7 @@ namespace TestTask100HPGames.Utils
             BindEnemySpawner();
             BindEnemyTracker();
             BindObjectPool();
+            BindCountdownDisplay();
         }
 
         private void BindTower()
@@ -48,6 +50,14 @@ namespace TestTask100HPGames.Utils
             Container
                 .Bind<ObjectPool>()
                 .FromInstance(ObjectPool)
+                .AsSingle();
+        }
+
+        private void BindCountdownDisplay()
+        {
+            Container
+                .Bind<CountdownDisplay>()
+                .FromInstance(CountdownDisplay)
                 .AsSingle();
         }
     }

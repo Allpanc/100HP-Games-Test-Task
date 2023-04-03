@@ -9,32 +9,16 @@ namespace TestTask100HPGames
         [SerializeField]
         private TMP_Text _textCountdown;
 
-        void Start()
+        public void UpdateView(int timer)
         {
-            MakeCountdown();
+            if (timer == 0)
+                _textCountdown.text = "Fight!";
+            else
+                _textCountdown.text = timer.ToString();
         }
 
-        private async void MakeCountdown()
+        public void Hide()
         {
-            await Countdown();
-        }
-
-        private async Task Countdown()
-        {
-            int timer = 3;
-            _textCountdown.text = timer.ToString();
-
-            while (timer > 0)
-            {
-                await Task.Delay(1000);
-                timer--;
-                
-                if (timer == 0)
-                    _textCountdown.text = "Fight!";
-                else
-                    _textCountdown.text = timer.ToString();
-            }
-            await Task.Delay(1000);
             _textCountdown.text = "";
         }
     }

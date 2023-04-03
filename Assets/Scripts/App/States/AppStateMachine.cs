@@ -1,24 +1,39 @@
+using TestTask100HPGames.Base;
+using TestTask100HPGames.Enemy.Spawn;
+
 namespace TestTask100HPGames
 {
     public class AppStateMachine
     {
-        private AppBaseState _currentState = new AppBaseState();
+        private AppBaseState _currentState;
 
-        private AppStartState _startState =  new AppStartState();
-        private AppGameState _gameState =  new AppGameState();
-        private AppLoseState _loseState = new AppLoseState();
-        private AppWinState _winState =  new AppWinState();
-        private AppPauseState _pauseState =  new AppPauseState();
+        private AppStartState _startState;
+        private AppGameState _gameState;
+        private AppLoseState _loseState;
+        private AppWinState _winState;
+        private AppPauseState _pauseState;
 
-        public void Initialize(Game app)
+        private Tower _tower;
+        private EnemySpawner _enemySpawner;
+        private CountdownDisplay _countdownDisplay;
+
+        public AppStateMachine(Tower tower, EnemySpawner enemySpawner, CountdownDisplay countdownDisplay)
         {
-            InitializeStates(app);
-            _startState.OnCountdownEnded += StartGame;
+            _tower = tower;
+            _enemySpawner = enemySpawner;
+            _countdownDisplay = countdownDisplay;
+
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            InitializeStates();
         }
 
         public void SetState(AppState state)
         {
-            _currentState.Exit();
+            _currentState?.Exit();
 
             switch (state)
             {
@@ -42,18 +57,13 @@ namespace TestTask100HPGames
             _currentState.Enter();
         }
 
-        public void StartGame()
+        private void InitializeStates()
         {
-            SetState(AppState.Game);
-        }
-
-        private void InitializeStates(Game app)
-        {
-            _startState.Initialize(app);
-            _gameState.Initialize(app);
-            _loseState.Initialize(app);
-            _winState.Initialize(app);
-            _pauseState.Initialize(app);
+            _startState =  new AppStartState(this, _countdownDisplay);
+            _gameState = new AppGameState(this, _tower, _enemySpawner);
+            _loseState = new AppLoseState();
+            _winState =  new AppWinState();
+            _pauseState = new AppPauseState();
         }
     }
 }

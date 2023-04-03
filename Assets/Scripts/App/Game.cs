@@ -8,22 +8,24 @@ namespace TestTask100HPGames
 {
     public class Game : MonoBehaviour
     {
-        private AppStateMachine _stateMachine =  new AppStateMachine();
+        private AppStateMachine _stateMachine;
 
-        public Tower Tower { get; private set; }
-        public EnemySpawner EnemySpawner { get; private set; }
+        private Tower _tower;
+        private EnemySpawner _enemySpawner;
+        private CountdownDisplay _countdownDisplay;
 
         [Inject]
-        private void Construct(Tower tower, EnemySpawner enemySpawner)
+        private void Construct(Tower tower, EnemySpawner enemySpawner, CountdownDisplay countdownDisplay)
         {
-            Tower = tower;
-            EnemySpawner = enemySpawner;
-            Tower.OnReached += Lose;
+            _tower = tower;
+            _enemySpawner = enemySpawner;
+            _countdownDisplay = countdownDisplay;
+            _tower.OnReached += Lose;
         }
 
         void Start()
         {
-            _stateMachine.Initialize(this);
+            _stateMachine = new AppStateMachine(_tower, _enemySpawner, _countdownDisplay);
             _stateMachine.SetState(AppState.Start);
         }
 
@@ -50,7 +52,7 @@ namespace TestTask100HPGames
 
         private void OnDestroy()
         {
-            Tower.OnReached -= Lose;
+            _tower.OnReached -= Lose;
         }
     }
 }

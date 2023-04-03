@@ -1,40 +1,46 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using TestTask100HPGames.Finances;
+using TestTask100HPGames.Utils;
 using UnityEngine;
 
 namespace TestTask100HPGames
 {
     public class AppStartState : AppBaseState
     {
-        public event Action<int> OnCountdownChanged;
-        public event Action OnCountdownEnded;
+        private AppStateMachine _stateMachine;
+        private CountdownDisplay _countdownDisplay;
+
+        public AppStartState(AppStateMachine stateMachine, CountdownDisplay countdownDisplay)
+        {
+            _stateMachine = stateMachine;
+            _countdownDisplay = countdownDisplay;
+        }
 
         public override void Enter()
         {
             base.Enter();
             Balance.Instance.Refresh();
-            WaitForCountdown();       
+            CoroutineLauncher.StartRoutine(Countdown()); 
         }
 
-        private async void WaitForCountdown()
+        private IEnumerator Countdown()
         {
-            await Countdown();
-        }
-
-        private async Task Countdown()
-        {
-
             int timer = 3;
-            Debug.Log(timer);
+
+            _countdownDisplay.UpdateView(timer);
+
             while (timer > 0)
             {
-                await Task.Delay(1000);
+                yield return new WaitForSeconds(1);
+
                 timer--;
-                Debug.Log(timer);
-                OnCountdownChanged?.Invoke(timer);
+                _countdownDisplay.UpdateView(timer);
             }
-            OnCountdownEnded?.Invoke();
+
+            yield return new WaitForSeconds(1);
+
+            _countdownDisplay.Hide();
+            _stateMachine.SetState(AppState.Game);
         }
     }
 }
